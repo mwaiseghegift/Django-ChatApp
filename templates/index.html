@@ -9,9 +9,9 @@
             <h1 class="text-center">Welcome to this ChatApp</h1>
     
             <div class="d-flex justify-content-center align-items-center">
-                <form action="" method="post">
-                    <input class="mt-4 form-control" type="text" name="" id="" placeholder="Enter username"><br>
-                    <input class='mt-4 form-control' type="text" name="" id="" placeholder="Enter room"><br>
+                <form action="{% url 'mainapp:room' %}" method="POST">{% csrf_token %}
+                    <input class="mt-4 form-control" type="text" name="username" id="" placeholder="Enter username"><br>
+                    <input class='mt-4 form-control' type="text" name="room-no" id="" placeholder="Enter room"><br>
                     <div class="mt-4 d-flex justify-content-center">
                         <button class="btn btn-primary" type="submit">Continue</button>
                     </div>
