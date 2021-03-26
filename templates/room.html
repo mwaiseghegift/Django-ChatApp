@@ -9,9 +9,13 @@
                         <h1 class="text-center">Welcome to {{room_no}}</h1>
                 
 
-                        <div id="message" >
+                        
+                        {% for message in messages %}
+                            <div id="messageContainer" >
+                                <div class="text-success bg-white"><p>{{ message }}</p></div>
+                            </div>
+                        {% endfor %}
                             
-                        </div>
 
                         <div class="d-flex justify-content-centre">
                             <input id="messageInput" class="form-control" type="text" name="">
@@ -21,4 +25,39 @@
         </div>
     </div>
 {% endblock body %}
+
+
+{% block script %}
+<script type = "text/javascript" >
+    //using the websocket protocol
+    const chatSocket = new WebSocket('ws://'+window.location.host+'/ws/chat/{{room_no}}/');
+    document.querySelector('#sendbtn').onclick= function(e){
+        const message = document.querySelector('#messageInput').value;
+        chatSocket.send(JSON.stringify({'message':'{{username}}: '+message}));
+        document.querySelector('#messageInput').value = '';
+    }
+
+
+    //function to send message when the user keys enter
+    document.querySelector('#messageInput').onkeyup = function(e){
+        if(e.keyCode == 13){
+            document.querySelector('#sendbtn').click();
+        }
+    }
+
+    function scrollToBottom(){
+        document.querySelector('#messageContainer').scrollTo({top:document.querySelector('#messageContainer').scrollHeight, behaviour:'smooth'}
+        )
+    }
+
+    chatSocket.onmessage = function(e){
+        const data = JSON.parse(e.data);
+        document.querySelector('#messageContainer').innerHTML += '<div class="text-success bg-white"><p>'+data.message+'</p></div>'
+        scrollToBottom();
+    }
+
+</script>
+{% endblock script %}
+    
+
     

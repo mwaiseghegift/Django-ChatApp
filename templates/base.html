@@ -14,21 +14,11 @@
         
     {% endblock body %}
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-    <script type = "text/javascript" >
-
-        const chatSocket = new WebSocket('ws://'+window.location.host+'/ws/chat/{{room_no}}/');
-        document.querySelector('#sendbtn').onclick= function(e){
-            const message = document.querySelector('#messageInput').value;
-            chatSocket.send(JSON.stringify({'message':'{{username}}: '+message}));
-            document.querySelector('#messageInput').value = '';
-        }
-
-        chatSocket.onmessage = function(e){
-            const data = JSON.parse(e.data);
-            document.querySelector('#message').innerHTML += '<div class="text-success bg-white"><p>'+data.message+'</p></div>'
-        }
-
-    </script>
+    
+    {% block script %}
+        
+    {% endblock script %}
+        
 </body>
 </html>
+
