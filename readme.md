@@ -7,8 +7,8 @@ An open source Social Network
 - Sqlite
 - Web Socket (Django Channel)
 
-  Login/Register
-Create post and comment on the particular post
-Receive notification when someone comment on your post
-Send friend request and accept request
-Live chat with friends
+    Login/Register
+- Create post and comment on the particular post
+- Receive notification when someone comment on your post
+- Send friend request and accept request
+- Live chat with friends
