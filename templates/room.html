@@ -33,7 +33,8 @@
     const chatSocket = new WebSocket('ws://'+window.location.host+'/ws/chat/{{room_no}}/');
     document.querySelector('#sendbtn').onclick= function(e){
         const message = document.querySelector('#messageInput').value;
-        chatSocket.send(JSON.stringify({'message':'{{username}}: '+message}));
+        chatSocket.send(JSON.stringify({'message':'{{username}}: '+message,
+                                        'user':'{{username}}'}));
         document.querySelector('#messageInput').value = '';
     }
 

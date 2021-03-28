@@ -8,7 +8,6 @@ def HomePage(request, *args, **kwargs):
 
 def RoomView(request, *args, **kwargs):
     if request.method == 'POST':
-        username = request.POST['username']
         room_no = request.POST['room-no']
         messages = []
         
@@ -16,7 +15,7 @@ def RoomView(request, *args, **kwargs):
         for obj in chat:
             messages.append(obj.message)
         context = {
-            'username':username,
+            'username':request.user,
             'room_no':room_no,
             'messages':messages,
         }
